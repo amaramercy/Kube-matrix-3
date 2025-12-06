@@ -4,14 +4,13 @@ on:
   workflow_dispatch:   # Manual trigger
   push:
     branches:
-      - main         # Only run on dev branch
+      - main         # Run on main branch
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
-  deploy-dev:
+  deploy-main:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,11 +18,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Configure AWS credentials via OIDC role
+      # 2️⃣ Configure AWS credentials using GitHub Secrets
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::<ACCOUNT_ID>:role/github-oidc-role
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
       # 3️⃣ Setup Terraform
