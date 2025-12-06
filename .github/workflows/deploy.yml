@@ -43,10 +43,9 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -var-file=envs/dev.tfvars
 
-    #   # 6️⃣ Terraform Apply (manual trigger only)
-    #   - name: Terraform Apply
-    #     if: github.event_name == 'workflow_dispatch'
-    #     run: terraform apply -var-file=envs/dev.tfvars -auto-approve
+      # 6️⃣ Terraform Apply (manual trigger only)
+      - name: Terraform Apply
+        run: terraform apply -var-file=envs/dev.tfvars -auto-approve
 
     #   # 7️⃣ Configure kubectl for EKS
     #   - name: Update Kubeconfig
