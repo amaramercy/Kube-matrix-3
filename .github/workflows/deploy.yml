@@ -4,7 +4,7 @@ on:
   workflow_dispatch:   # Manual trigger
   push:
     branches:
-      - dev           # Only run on dev branch
+      - main         # Only run on dev branch
 
 permissions:
   id-token: write
